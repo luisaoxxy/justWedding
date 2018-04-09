@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14809570652540" configfile="/bodas/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="homme.xhtml" id="pf15095501143192" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf15095631757234 pf15117150357810" inlinks="pf15095632742516" path="homme.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="guestList.xhtml" id="pf15095631757235" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" outlinks="pf15110225643125" inlinks="pf15095631757234 pf15111150269162" path="guestList.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="genericInfoForm.xhtml" id="pf15095632742517" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf15095632742516" path="genericInfoForm.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="newGuest.xhtml" id="pf15110225643126" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf15111150269162" inlinks="pf15110225643125" path="newGuest.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="tables.xhtml" id="pf15117150357811" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" inlinks="pf15117150357810" path="tables.xhtml"/>
+  <links id="pf15095631757234" target="pf15095631757235" source="pf15095501143192" outcome="guestList"/>
+  <links id="pf15095632742516" target="pf15095501143192" source="pf15095632742517" outcome="continue"/>
+  <links id="pf15110225643125" target="pf15110225643126" source="pf15095631757235" outcome="addGuest"/>
+  <links id="pf15111150269162" target="pf15095631757235" source="pf15110225643126" outcome="guestList" redirect="true"/>
+  <links id="pf15117150357810" target="pf15117150357811" source="pf15095501143192" outcome="tables"/>
+</pageflow:Pageflow>

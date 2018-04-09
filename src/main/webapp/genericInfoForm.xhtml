@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:p="http://primefaces.org/ui"
+   template="/template.xhtml">
+   
+   <ui:define name="body">
+		<h:form>
+			<p:panel header="#{msg.moreData}"  styleClass="welcomeTitle">
+				<h:panelGrid styleClass="initForm" footerClass="image_init" columns="2">
+				    <h:outputText value="#{msg.brideName}"/>
+				    <p:inputText value="#{groomsBean.brideName}"/>
+				    <h:outputText value="#{msg.groomName}"/>
+				    <p:inputText value="#{groomsBean.groomName}"/>
+				    <h:outputText value="#{msg.weddingDate}"/>
+				    <p:calendar value="#{groomsBean.weddingDate}" pattern="dd/MM/yyyy HH:mm:ss" mindate="#{groomsBean.currentDate}"/>
+				    <h:outputText value="#{msg.weddingPlace}"/>
+				    <p:inputText value="#{groomsBean.weddingPlace}"/>
+				    <h:outputText value="#{msg.weddingRestaurant}"/>
+				    <p:inputText value="#{groomsBean.weddingRestaurant}"/>
+				    <h:outputText value="#{msg.weddingType}"/>
+				    <p:selectOneRadio value="#{groomsBean.weddingType}">
+				    	<f:selectItem itemLabel="#{msg['weddingType.civilian']}" itemValue="C" />
+				    	<f:selectItem itemLabel="#{msg['weddingType.religious']}" itemValue="R" />
+				    </p:selectOneRadio>
+				    <f:facet name="footer">
+					    <h:panelGroup>
+					    	<h:outputText value="________"/>
+					    </h:panelGroup>
+				    </f:facet>
+				</h:panelGrid>
+				<p:commandButton value="#{msg.next}" action="continue" ajax="false"/>
+			</p:panel>
+	    </h:form>
+	</ui:define>
+</ui:composition>

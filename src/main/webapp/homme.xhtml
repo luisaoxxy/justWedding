@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:p="http://primefaces.org/ui"
+   template="/template.xhtml">
+
+	<ui:define name="body">
+		<p:panel header="#{groomsBean.weddingDateHeader}" styleClass="welcomeTitle">
+	    	<h:panelGrid columns="1" styleClass="center homme">
+		    	<h:panelGroup>
+					 <div class="wrapper">
+				      <div class="cell">
+				        <div id="holder">
+				          <div class="digits"></div>
+				        </div>
+				      </div>
+			    	</div>
+		    	</h:panelGroup>
+		    	<h:panelGroup>
+					<h:panelGrid columns="7" styleClass="contDown_labels">
+				        <h:outputText value="#{msg.days}"/>
+				        <h:outputText value=""/>
+				        <h:outputText value="#{msg.hours}"/>
+				        <h:outputText value=""/>
+				        <h:outputText value="#{msg.minutes}"/>
+				        <h:outputText value=""/>
+				        <h:outputText value="#{msg.seconds}"/>
+			        </h:panelGrid>
+		    	</h:panelGroup>
+		    	<!--  
+		    	<p:spacer height="0.5%" width="100%"/>
+		    	-->
+		    	<h:panelGroup>
+		    		<h:form>
+				    	<h:panelGrid columns="3" styleClass="menu">
+				    	   <h:commandLink action="guestList">
+				    	   	<h:graphicImage styleClass="mainImage" title="#{msg.guests}" alt="#{msg.guests}" url="#{resource['imgs/guests.png']}"/>
+				    	   </h:commandLink>
+				    	   <h:graphicImage styleClass="mainImage" title="#{msg.calendar}" alt="#{msg.calendar}" url="#{resource['imgs/calendar.png']}"/>
+				    	   <h:graphicImage styleClass="mainImage" title="#{msg.cost}" alt="#{msg.cost}" url="#{resource['imgs/costs.png']}"/>
+				           <p:outputLabel value="#{msg.guests}"/>
+				           <p:outputLabel value="#{msg.calendar}"/>
+				           <p:outputLabel value="#{msg.cost}"/>
+				    	   <h:commandLink action="tables">
+					    	   <h:graphicImage styleClass="mainImage" title="#{msg.tables}" alt="#{msg.tables}" url="#{resource['imgs/tables.png']}"/>
+				    	   </h:commandLink>
+				    	   <h:graphicImage styleClass="mainImage" title="#{msg.supplier}" alt="#{msg.supplier}" url="#{resource['imgs/suppliers.png']}"/>
+				    	   <h:graphicImage styleClass="mainImage" title="#{msg.resume}" alt="#{msg.resume}" url="#{resource['imgs/resume.png']}"/>
+				           <p:outputLabel value="#{msg.tables}"/>
+				           <p:outputLabel value="#{msg.supplier}"/>
+				           <p:outputLabel value="#{msg.resume}"/>
+				      	</h:panelGrid>
+		    		</h:form>
+		    	</h:panelGroup>
+	    	</h:panelGrid>
+    	</p:panel>
+	    <script>
+	    $(function(){
+	        $(".digits").countdown({
+	          image: "#{resource['imgs/digits.png']}",
+	          format: "dd:hh:mm:ss",
+	          endTime: new Date(#{groomsBean.weddingDate.time})
+	        });
+	      });
+	    </script>
+	</ui:define>
+</ui:composition>

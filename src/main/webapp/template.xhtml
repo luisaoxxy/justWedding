@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+        <h:outputScript name="jquery/jquery.js" library="primefaces"/>
+        <h:outputScript name="jquery.countdown.js" library="js"/>
+        <h:outputScript name="wedding.js" library="js"/>
+	   <h:outputStylesheet name="css/wedding.css"/>
+    </h:head>
+    <f:view locale="#{languageBean.locale}">
+ 
+        <h:form prependId="false">
+        	<p:panel>
+	        	<h:panelGrid columns="4" styleClass="initForm" cellpadding="10" footerClass="header_image">
+			        <p:outputLabel for="selTheme" value="#{msg.themeSelection}" /> 
+			        <p:themeSwitcher id="selTheme" style="width:165px" value="#{themeSwitcherBean.theme}" effect="fade" var="t">
+			            <f:selectItems value="#{themeSwitcherBean.themes}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme.name}"/>
+	              		<p:ajax global="false" listener="#{themeSwitcherBean.saveTheme}" />
+			            <p:column>
+			                <h:outputText styleClass="ui-theme ui-theme-" style="display-block" />
+			            </p:column>
+			            <p:column>
+			            </p:column>
+			        </p:themeSwitcher>
+	
+					<p:outputLabel for="langSelect" value="#{msg.language}" />
+					<h:selectOneMenu  id="langSelect" value="#{languageBean.localeCode}" onchange="submit()"
+						valueChangeListener="#{languageBean.countryLocaleCodeChanged}">
+			   			<f:selectItems value="#{languageBean.countriesInMap}" />
+			   		</h:selectOneMenu>
+			   		<f:facet name="footer">
+					    <h:panelGroup>
+					    	<h:outputText value="________"/>
+					    </h:panelGroup>
+				    </f:facet>
+	   			</h:panelGrid>
+   			</p:panel>
+        </h:form>
+        <ui:insert name="body"/>
+    </f:view>
+</html>

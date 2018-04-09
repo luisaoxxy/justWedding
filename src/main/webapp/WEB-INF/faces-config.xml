@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+	version="2.1">
+
+	<application>
+	   <locale-config>
+       	<default-locale>es</default-locale>
+       	<supported-locale>en</supported-locale>
+   	   </locale-config>
+		<resource-bundle>
+			<base-name>es.justWedding.in18.messages</base-name>
+			<var>msg</var>
+		</resource-bundle>
+	</application>
+
+	<application>
+	 	<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+	</application>
+    <factory>
+		<partial-view-context-factory>org.primefaces.context.PrimePartialViewContextFactory</partial-view-context-factory>
+	</factory>
+	<!-- RULES -->
+	<navigation-rule>
+		<from-view-id>
+			genericInfoForm.xhtml
+		</from-view-id>
+		<navigation-case>
+			<from-outcome>continue</from-outcome>
+			<to-view-id>homme.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>
+			homme.xhtml
+		</from-view-id>
+		<navigation-case>
+			<from-outcome>guestList</from-outcome>
+			<to-view-id>guestList.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>tables</from-outcome>
+			<to-view-id>tables.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>guestList.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>addGuest</from-outcome>
+			<to-view-id>newGuest.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>newGuest.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>guestList</from-outcome>
+			<to-view-id>guestList.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+</faces-config>
