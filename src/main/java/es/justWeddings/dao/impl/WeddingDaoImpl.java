@@ -1,6 +1,4 @@
-package es.justWeddings.dao;
-
-import java.util.List;
+package es.justWeddings.dao.impl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -8,23 +6,20 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.justWeddings.domain.Guest;
+import es.justWeddings.dao.WeddingDao;
+import es.justWeddings.domain.Wedding;
+
 @Repository
 @Transactional
-public class GuestDaoImpl implements GuestDao {
+public class WeddingDaoImpl implements WeddingDao {
 	
 	@PersistenceContext
     private EntityManager manager;
 	
 	@Override
-	public void addGuest(Guest guest) {
-		manager.persist(guest);
-	}
-
-	@Override
-	public List<Guest> findAllGuest() {
-		// TODO Auto-generated method stub
-		return null;
+	public Wedding create(Wedding wedding) {
+		manager.persist(wedding);
+		return wedding;
 	}
 
 }

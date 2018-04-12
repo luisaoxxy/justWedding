@@ -40,7 +40,9 @@
 				    	   <h:commandLink action="guestList">
 				    	   	<h:graphicImage styleClass="mainImage" title="#{msg.guests}" alt="#{msg.guests}" url="#{resource['imgs/guests.png']}"/>
 				    	   </h:commandLink>
-				    	   <h:graphicImage styleClass="mainImage" title="#{msg.calendar}" alt="#{msg.calendar}" url="#{resource['imgs/calendar.png']}"/>
+				    	   <h:commandLink action="calendar">
+					    	   <h:graphicImage styleClass="mainImage" title="#{msg.calendar}" alt="#{msg.calendar}" url="#{resource['imgs/calendar.png']}"/>
+				    	   </h:commandLink>
 				    	   <h:graphicImage styleClass="mainImage" title="#{msg.cost}" alt="#{msg.cost}" url="#{resource['imgs/costs.png']}"/>
 				           <p:outputLabel value="#{msg.guests}"/>
 				           <p:outputLabel value="#{msg.calendar}"/>
@@ -62,7 +64,7 @@
 	    $(function(){
 	        $(".digits").countdown({
 	          image: "#{resource['imgs/digits.png']}",
-	          format: "dd:hh:mm:ss",
+	          format: "ddd:hh:mm:ss",
 	          endTime: new Date(#{groomsBean.weddingDate.time})
 	        });
 	      });

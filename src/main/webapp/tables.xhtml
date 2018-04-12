@@ -10,49 +10,52 @@
    
 	<ui:define name="body">
 	 <p:panel id="panelHall" header="#{msg.tables}" styleClass="welcomeTitle">
-			<p:fieldset id="hall" legend="#{msg.hall}">
-			 	<ui:repeat var="table" varStatus="tableIndex" value="#{tablesBean.tables}">
-					 <p:outputPanel id="table_#{tableIndex.index}" style="position: relative;left:#{table.xPosition}px;top:#{table.yPosition}px" 
-					 styleClass="tables #{table.type == 'R' ? 'rectangle' : 'circle'} #{table.invitedBy != null ? (table.invitedBy == groomsBean.groomName ? 'userTable' : 'partnerTable') : 'groomsTable'}">
-					 	<p:commandButton style="background:transparent" styleClass="tables #{table.type == 'R' ? 'rectangle' : 'circle'} #{table.invitedBy != null ? (table.invitedBy == groomsBean.groomName ? 'userTable' : 'partnerTable') : 'groomsTable'}" value="#{table.number}" update="formaPanel:tableDetail" oncomplete="PF('tableOP').show('#{component.clientId}')">
-                			<f:setPropertyActionListener value="#{table}" target="#{tablesBean.tableSelected}" />
-            			</p:commandButton>
-				 	</p:outputPanel>
-					 <p:tooltip for="table_" value="#{table.name}" trackMouse="true" />
-					 <p:draggable for="table_" />
-					  
-			 	</ui:repeat>
-			  	<h:form id="formaPanel">
-			 	<p:overlayPanel widgetVar="tableOP" styleClass="panelTable" showEffect="blind" dismissable="false" hideEffect="explode" dynamic="false" showCloseIcon="true">
-				  	<p:outputPanel id="tableDetail">
-				  		<h:outputText value="#{msg.name}"/>
-					    <p:inputText value="#{tablesBean.tableSelected.name}"/>
-					  	<h:outputText value="#{msg.number}"/>
-					    <p:inputText value="#{tablesBean.tableSelected.number}"/>
-					    <h:outputText value="#{msg.invitedBy}"/>
-		        		<p:selectOneMenu rendered="#{tablesBean.tableSelected.invitedBy != null}" value="#{tablesBean.tableSelected.invitedBy}">
-			   				<f:selectItems value="#{groomsBean.groomsList}" />
-		   				</p:selectOneMenu>
-		   				<h:outputText value="#{msg.tableType}"/>
-		   				<p:selectOneMenu value="#{tablesBean.tableSelected.type}">
-			   				<f:selectItems value="#{tablesBean.tableTypes}" />
-		   				</p:selectOneMenu>
-		   				<p:dataTable id="guestList" rows="5" paginatorPosition="bottom" value="#{guestBean.guestList}" var="guest">
-				            <p:column headerText="#{msg.name}">
-				                <h:outputText value="#{guest.name}"/>
-				            </p:column>
-				            <p:column headerText="#{msg.lastName}">
-				                <h:outputText value="#{guest.lastName}"/>
-				            </p:column>
-		   				</p:dataTable>
-		   				<p:commandButton value="#{msg.save}" update="hall"/>
-	   				</p:outputPanel>
-					  </p:overlayPanel>
-		  	</h:form>
-				 <p:droppable for="hall">
-				 	<p:ajax listener="#{tablesBean.onDrop}" />
-				 </p:droppable>
+			<p:fieldset legend="#{msg.hall}">
+				<p:outputPanel id="hall" layout="block" style="position: relative;min-height:#{tablesBean.tables.size() * 30}px">
+				 	<ui:repeat var="table" varStatus="tableIndex" value="#{tablesBean.tables}">
+						 <p:outputPanel id="table_#{tableIndex.index}" style="position: absolute;left:#{table.xPosition}px;top:#{table.yPosition}px" 
+						 styleClass="tables #{table.type == 'R' ? 'rectangle' : 'circle'} #{table.invitedBy != null ? (table.invitedBy == groomsBean.groomName ? 'userTable' : 'partnerTable') : 'groomsTable'}">
+						 	<p:commandLink style="background:transparent;text-decoration: none;" value="#{table.number}" update="formaPanel:tableDetail" onclick="PF('tableOP').show('#{component.clientId}')">
+							 	<f:setPropertyActionListener value="#{table}" target="#{tablesBean.tableSelected}" />
+	            			</p:commandLink>
+					 	</p:outputPanel>
+						 <p:tooltip for="table_" value="#{table.name}" trackMouse="true" />
+						 <p:draggable for="table_" revert="true" grid="40,35" containment="#hall"/>
+						  
+				 	</ui:repeat>
+				  	<h:form id="formaPanel">
+				 		<p:overlayPanel widgetVar="tableOP" styleClass="panelTable" showEffect="blind" dismissable="false" hideEffect="explode" dynamic="false" showCloseIcon="true">
+						  	<p:outputPanel id="tableDetail">
+						  		<h:panelGrid columns="2">
+							  		<h:outputText value="#{msg.name}"/>
+								    <p:inputText value="#{tablesBean.tableSelected.name}"/>
+								  	<h:outputText value="#{msg.number}"/>
+								    <p:inputText value="#{tablesBean.tableSelected.number}"/>
+								    <h:outputText value="#{msg.invitedBy}"/>
+					        		<p:selectOneMenu rendered="#{tablesBean.tableSelected.invitedBy != null}" value="#{tablesBean.tableSelected.invitedBy}">
+						   				<f:selectItems value="#{groomsBean.groomsList}" />
+					   				</p:selectOneMenu>
+					   				<h:outputText rendered="#{tablesBean.tableSelected.invitedBy == null}" value="#{msg.engaged}"/>
+					   				<h:outputText value="#{msg.tableType}"/>
+					   				<p:selectOneMenu value="#{tablesBean.tableSelected.type}">
+						   				<f:selectItem itemLabel="#{msg['tableType.circular']}" itemValue="C" />
+						   				<f:selectItem itemLabel="#{msg['tableType.rectangular']}" itemValue="R" />
+					   				</p:selectOneMenu>
+					   				<p:commandLink value="#{msg.addGuest}" action="tableGuests"/>
+						  		</h:panelGrid>
+				   				
+				   				<p:commandButton value="#{msg.save}" update="hall" icon="fa fa-fw fa-save"/>
+			   				</p:outputPanel>
+					  	</p:overlayPanel>
+			  		</h:form>
+					<p:droppable for="hall">
+					 	<p:ajax listener="#{tablesBean.onDrop}" />
+					</p:droppable>
+				</p:outputPanel>
 			 </p:fieldset>
+	  		<p:commandButton value="#{msg['table.add']}" action="tableGuests">
+	  			<f:setPropertyActionListener value="" target="#{tablesBean.tableSelected}" />
+  			</p:commandButton>
 	</p:panel>
 	</ui:define>
 </ui:composition>

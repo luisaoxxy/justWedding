@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:p="http://primefaces.org/ui"
+   template="/template.xhtml">
+   
+	<ui:define name="body">
+	#{tablesBean.init()}
+	 <p:panel header="#{msg['table.detail']}" styleClass="welcomeTitle">
+	  	<h:form>
+			<h:panelGrid columns="4" width="100%">
+			  	<h:outputText value="#{msg.tableType}"/>
+			    <p:selectOneMenu value="#{tablesBean.tableSelected.type}">
+	   				<f:selectItem itemLabel="#{msg['tableType.circular']}" itemValue="C" />
+	   				<f:selectItem itemLabel="#{msg['tableType.rectangular']}" itemValue="R" />
+   				</p:selectOneMenu>
+			  	<h:outputText value="#{msg.name}"/>
+			    <h:inputText value="#{tablesBean.tableSelected.name}"/>
+			  	<h:outputText value="#{msg.number}"/>
+			    <h:inputText value="#{tablesBean.tableSelected.number}"/>
+			    <h:outputText value="#{msg.invitedBy}"/>
+			    <p:selectOneMenu rendered="#{tablesBean.tableSelected.invitedBy != null}" value="#{tablesBean.tableSelected.invitedBy}">
+	   				<f:selectItems value="#{groomsBean.groomsList}" />
+   				</p:selectOneMenu>
+   				<h:outputText rendered="#{tablesBean.tableSelected.invitedBy == null}" value="#{msg.engaged}"/>
+			</h:panelGrid>	
+	        <p:pickList id="pickList" showSourceFilter="true" filterMatchMode="contains" responsive="true" value="#{tablesBean.guests}" var="guest" itemLabel="#{guest.name.concat(' ').concat(guest.lastName)}" itemValue="#{guest}" >
+	        	<f:facet name="sourceCaption">#{msg.guestList}</f:facet>
+       			<f:facet name="targetCaption">#{msg.guests} #{msg.table}#{tablesBean.tableSelected.number}</f:facet>
+	        </p:pickList>
+			<p:spacer height="5px" width="100%"/>		        	
+	        <p:commandButton value="#{msg.save}" action="#{tablesBean.updateTable}" icon="fa fa-fw fa-save" ajax="false"/>
+	  	</h:form>
+	</p:panel>
+	</ui:define>
+</ui:composition>

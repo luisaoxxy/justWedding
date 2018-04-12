@@ -9,8 +9,11 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.DragDropEvent;
+import org.primefaces.model.DualListModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import es.justWeddings.domain.Guest;
 import es.justWeddings.domain.Tables;
 import es.justWeddings.domain.types.TableTypes;
 
@@ -27,23 +30,53 @@ public class TablesBean {
   private String tableInvitedBy;
   private String xPosition;
   private String yPosition;
+  private DualListModel<Guest> guests;
+  @Autowired
+  private GuestBean guestBean;
   
   public TablesBean(){
 	  tables = new ArrayList<Tables>();
 	  tableTypes = new ArrayList<TableTypes>(Arrays.asList(TableTypes.values()));
 	  Tables family = new Tables("family", "R", "Luis", 1);
-	  family.setxPosition(410);
-	  family.setyPosition(25);
+	  family.setId(1);
+	  family.setxPosition(480);
+	  family.setyPosition(35);
 	  tables.add(family);
 	  Tables friends = new Tables("friends", "C", "Arantxa", 2);
-	  friends.setxPosition(665);
-	  friends.setyPosition(-11);
+	  friends.setId(2);
+	  friends.setxPosition(640);
+	  friends.setyPosition(35);
 	  tables.add(friends);
 	  Tables principal = new Tables("Principal", "R", null, 0);
-	  principal.setxPosition(532);
-	  principal.setyPosition(-94);
+	  principal.setId(3);
+	  principal.setxPosition(560);
+	  principal.setyPosition(0);
 	  tables.add(principal);
 	  tableSelected = new Tables();
+	  guests = new DualListModel<>();
+  }
+  
+  public void init() {
+	  if(guestBean.getGuestList() == null){
+		  guestBean.setGuestList(new ArrayList<Guest>());
+	  }
+	  guests.setSource(guestBean.getGuestList());
+	  guests.setTarget(new ArrayList<Guest>());
+	  if(tableSelected == null){
+		  tableSelected = new Tables();
+		  tableSelected.setInvitedBy(" ");
+	  }
+  }
+  
+  public String updateTable(){
+	  if(tableSelected.getId() == null){
+		  //CREATE
+		  tableSelected.setId(tableSelected.getNumber());
+		  tables.add(tableSelected);
+	  }else{
+		  //UPDATE
+	  }
+	  return  "tables";
   }
   
   public void onDrop(DragDropEvent dragDropEvent) {
@@ -125,6 +158,22 @@ public List<TableTypes> getTableTypes() {
 
 public void setTableTypes(List<TableTypes> tableTypes) {
 	this.tableTypes = tableTypes;
+}
+
+public DualListModel<Guest> getGuests() {
+	return guests;
+}
+
+public void setGuests(DualListModel<Guest> guests) {
+	this.guests = guests;
+}
+
+public GuestBean getGuestBean() {
+	return guestBean;
+}
+
+public void setGuestBean(GuestBean guestBean) {
+	this.guestBean = guestBean;
 }
 
 }

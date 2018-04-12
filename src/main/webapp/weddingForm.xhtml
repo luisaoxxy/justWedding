@@ -12,18 +12,18 @@
 		<h:form>
 			<p:panel header="#{msg.moreData}"  styleClass="welcomeTitle">
 				<h:panelGrid styleClass="initForm" footerClass="image_init" columns="2">
-				    <h:outputText value="#{msg.brideName}"/>
-				    <p:inputText value="#{groomsBean.brideName}"/>
 				    <h:outputText value="#{msg.groomName}"/>
-				    <p:inputText value="#{groomsBean.groomName}"/>
+				    <p:inputText value="#{groomsBean.groomName}" required="true"/>
+				    <h:outputText value="#{msg.brideName}"/>
+				    <p:inputText value="#{groomsBean.brideName}" required="true"/>
 				    <h:outputText value="#{msg.weddingDate}"/>
-				    <p:calendar value="#{groomsBean.weddingDate}" pattern="dd/MM/yyyy HH:mm:ss" mindate="#{groomsBean.currentDate}"/>
+				    <p:calendar value="#{groomsBean.weddingDate}" pattern="dd/MM/yyyy HH:mm:ss" mindate="#{groomsBean.currentDate}" required="true"/>
 				    <h:outputText value="#{msg.weddingPlace}"/>
-				    <p:inputText value="#{groomsBean.weddingPlace}"/>
+				    <p:inputText value="#{groomsBean.weddingPlace}" required="true"/>
 				    <h:outputText value="#{msg.weddingRestaurant}"/>
 				    <p:inputText value="#{groomsBean.weddingRestaurant}"/>
 				    <h:outputText value="#{msg.weddingType}"/>
-				    <p:selectOneRadio value="#{groomsBean.weddingType}">
+				    <p:selectOneRadio value="#{groomsBean.weddingType}" required="true">
 				    	<f:selectItem itemLabel="#{msg['weddingType.civilian']}" itemValue="C" />
 				    	<f:selectItem itemLabel="#{msg['weddingType.religious']}" itemValue="R" />
 				    </p:selectOneRadio>
@@ -33,7 +33,7 @@
 					    </h:panelGroup>
 				    </f:facet>
 				</h:panelGrid>
-				<p:commandButton value="#{msg.next}" action="continue" ajax="false"/>
+				<p:commandButton value="#{msg.next}" validateClient="true" action="#{groomsBean.createWedding}" ajax="false"/>
 			</p:panel>
 	    </h:form>
 	</ui:define>

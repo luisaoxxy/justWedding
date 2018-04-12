@@ -16,12 +16,30 @@
 	        <p:separator/>
 	        
 	        <h:panelGrid columns="1">
-		        <p:dataTable id="guestList" value="#{guestBean.guestList}" var="guest">
-		            <p:column headerText="#{msg.name}">
+		        <p:dataTable id="guestList" emptyMessage="#{msg.noGuests}" styleClass="center" value="#{guestBean.guestList}" var="guest">
+		            <p:column headerText="#{msg.name}" sortBy="#{guest.name}" filterMatchMode="contains" filterBy="#{guest.name}">
 		                <h:outputText value="#{guest.name}"/>
 		            </p:column>
-		            <p:column headerText="#{msg.lastName}">
+		            <p:column headerText="#{msg.lastName}" sortBy="#{guest.lastName}" filterMatchMode="contains" filterBy="#{guest.lastName}">
 		                <h:outputText value="#{guest.lastName}"/>
+		            </p:column>
+		            <p:column headerText="#{msg.guestSex}" sortBy="#{guest.sex}" filterMatchMode="contains" filterBy="#{guest.sex}">
+		                <h:outputText value="#{guest.sex}"/>
+		            </p:column>
+		            <p:column headerText="#{msg.invitedBy}" sortBy="#{guest.invitedBy}" filterMatchMode="contains" filterBy="#{guest.invitedBy}">
+		                <h:outputText value="#{guest.invitedBy}"/>
+		            </p:column>
+		            <p:column headerText="#{msg.group}" sortBy="#{guest.group}" filterMatchMode="contains" filterBy="#{guest.group}">
+		                <h:outputText value="#{guest.group}"/>
+		            </p:column>
+		            <p:column headerText="#{msg.haveAllergies}">
+		                <h:graphicImage rendered="#{guest.allerge != null}" styleClass="ico" title="#{msg.haveAllergies}" alt="#{msg.haveAllergies}" url="#{resource['imgs/allergy.png']}"/>
+		            </p:column>
+		            <p:column headerText="#{msg.vegetarian}">
+		                <h:graphicImage rendered="#{guest.vegetarian == 'Y'}" styleClass="ico" title="#{msg.vegetarian}" alt="#{msg.vegetarian}" url="#{resource['imgs/carrot.png']}"/>
+		            </p:column>
+		            <p:column headerText="#{msg.busRequired}">
+   		            	<h:graphicImage rendered="#{guest.busRequired == 'Y'}" styleClass="ico bus" title="#{msg.busRequired}" alt="#{msg.busRequired}" url="#{resource['imgs/bus.png']}"/>
 		            </p:column>
 		        </p:dataTable>
 			</h:panelGrid>

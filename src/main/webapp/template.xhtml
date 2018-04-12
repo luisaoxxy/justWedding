@@ -17,7 +17,7 @@
  
         <h:form prependId="false">
         	<p:panel>
-	        	<h:panelGrid columns="4" styleClass="initForm" cellpadding="10" footerClass="header_image">
+	        	<h:panelGrid columns="5" styleClass="initForm" cellpadding="10">
 			        <p:outputLabel for="selTheme" value="#{msg.themeSelection}" /> 
 			        <p:themeSwitcher id="selTheme" style="width:165px" value="#{themeSwitcherBean.theme}" effect="fade" var="t">
 			            <f:selectItems value="#{themeSwitcherBean.themes}" var="theme" itemLabel="#{theme.displayName}" itemValue="#{theme.name}"/>
@@ -34,11 +34,9 @@
 						valueChangeListener="#{languageBean.countryLocaleCodeChanged}">
 			   			<f:selectItems value="#{languageBean.countriesInMap}" />
 			   		</h:selectOneMenu>
-			   		<f:facet name="footer">
-					    <h:panelGroup>
-					    	<h:outputText value="________"/>
-					    </h:panelGroup>
-				    </f:facet>
+				    <p:commandLink action="homme" ajax="false">
+				    	<p:graphicImage title="Homme" styleClass="header_image" url="/javax.faces.resource/justWedding.png.jsf?ln=imgs"/>
+			    	</p:commandLink>
 	   			</h:panelGrid>
    			</p:panel>
         </h:form>

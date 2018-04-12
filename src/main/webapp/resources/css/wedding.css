@@ -50,12 +50,9 @@
 	float: left;
 }
 .header_image{
-    padding-left: 250px;
-    color: transparent;
-    background: url(/javax.faces.resource/justWedding.png.jsf?ln=imgs);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 22%;
+    width: 26%;
+    cursor: pointer;
+    margin-left: 15%;
 }
 .center{
 	margin: 0 auto;
@@ -120,4 +117,12 @@
 }
 .panelTable {
     width: 30%;
+}
+.fc-basic-view tbody .fc-row {
+    min-height: 3.1em !important;
+    height: 20% !important;
+}
+.fc-event{
+	background: crimson !important;
+	border: black !important;
 }

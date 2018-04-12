@@ -7,9 +7,12 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -38,6 +41,9 @@ public class User implements java.io.Serializable {
 	private Date birthday;
 	@Column(name = "THEME")
 	private String theme;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "WEDDING_ID", referencedColumnName = "ID", nullable = false)
+	private Wedding wedding = new Wedding();
 
 	public User() {
 	}
@@ -133,6 +139,14 @@ public class User implements java.io.Serializable {
 
 	public void setTheme(String theme) {
 		this.theme = theme;
+	}
+
+	public Wedding getWedding() {
+		return wedding;
+	}
+
+	public void setWedding(Wedding wedding) {
+		this.wedding = wedding;
 	}
 
 }

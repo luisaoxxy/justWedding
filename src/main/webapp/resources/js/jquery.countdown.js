@@ -145,10 +145,10 @@ var parseRelativeDate = function(form, options) {
   // read in components and render based on format
   var format = options.format;
   var parts = form.split(':');
-  if( format.indexOf('dd') == 0 ) {
+  if( format.indexOf('ddd') == 0 ) {
       d = parts[0];
       parts = parts.slice(1);
-      format = format.substr(3);
+      format = format.substr(4);
   }
   if( format.indexOf('hh') == 0 ) {
       h = parts[0];
@@ -179,7 +179,7 @@ var formatCompute = function(d, options) {
 	m: d.getUTCMinutes(),
 	s: d.getUTCSeconds()
       };
-      return format.replace(/(dd|hh|mm|ss)/g, function($0, form) {
+      return format.replace(/(ddd|hh|mm|ss)/g, function($0, form) {
 	      return pad(parse[form[0]]);
       });
 };

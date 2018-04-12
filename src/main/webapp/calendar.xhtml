@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/template.xhtml">
+
+	<ui:define name="body">
+		<p:panel header="#{msg.calendar}" styleClass="welcomeTitle">
+			<h:form>
+				<p:schedule id="schedule" showWeekNumbers="true"
+					locale="#{languageBean.localeCode}" timeZone="GMT+2"
+					value="#{scheduleBean.eventModel}" timeFormat="HH" axisFormat="HH" widgetVar="myschedule">
+					<p:ajax event="dateSelect" listener="#{scheduleBean.onDateSelect}"
+						update="eventDetails" oncomplete="PF('eventDialog').show();" />
+					<p:ajax event="eventSelect"
+						listener="#{scheduleBean.onEventSelect}" update="eventDetails"
+						oncomplete="PF('eventDialog').show();" />
+				</p:schedule>
+
+				<p:dialog id="eventDetails" widgetVar="eventDialog" header="#{scheduleBean.event.title != null ? msg['event.detail'] : msg['event.add']}"
+					showEffect="clip" hideEffect="clip">
+					<h:panelGrid columns="2">
+						<p:outputLabel for="title" value="#{msg.title}" />
+						<p:inputText id="title" value="#{scheduleBean.event.title}"
+							required="true" />
+
+						<p:outputLabel for="from" value="#{msg.from}" />
+						<p:calendar id="from" value="#{scheduleBean.event.startDate}"
+							pattern="dd/MM/yyyy HH:mm"  timeZone="GMT+2"/>
+
+						<p:outputLabel for="to" value="#{msg.to}" />
+						<p:calendar id="to" value="#{scheduleBean.event.endDate}"
+							pattern="dd/MM/yyyy HH:mm" timeZone="GMT+2" />
+
+						<p:outputLabel for="allDay" value="#{msg.allDay}" />
+						<h:selectBooleanCheckbox id="allDay" value="#{scheduleBean.event.allDay}" />
+
+						<p:commandButton type="reset" value="Reset" />
+						<p:commandButton id="addButton" value="#{msg.save}"
+							actionListener="#{scheduleBean.addEvent}"
+							oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
+			<script type="text/javascript">
+				PrimeFaces.locales['es'] = {
+					closeText : 'Cerrar',
+					prevText : 'Anterior',
+					nextText : 'Siguinte',
+					currentText : 'Inicio',
+					monthNames : [ 'Enero', 'Febrero', 'Marzo', 'Abril',
+							'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre',
+							'Outubre', 'Noviembre', 'Diciembre' ],
+					monthNamesShort : [ 'Ene', 'Feb', 'Mar', 'Abr', 'May',
+							'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic' ],
+					dayNames : [ 'Domingo', 'Lunes', 'Martes', 'Miercoles',
+							'Jueves', 'Viernes', 'Sábado' ],
+					dayNamesShort : [ 'Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie',
+							'Sáb' ],
+					dayNamesMin : [ 'D', 'L', 'Ma', 'Mi', 'J', 'V', 'S' ],
+					weekHeader : 'Semana',
+					firstDay : 1,
+					isRTL : false,
+					showMonthAfterYear : false,
+					yearSuffix : '',
+					timeOnlyTitle : 'Solo Horas',
+					timeText : 'Tiempo',
+					hourText : 'Hora',
+					minuteText : 'Minuto',
+					secondText : 'Segundo',
+					ampm : false,
+					month : 'Mes',
+					week : 'Semana',
+					day : 'Día',
+					allDayText : 'Todo el día'
+				};
+			</script>
+		</p:panel>
+	</ui:define>
+</ui:composition>

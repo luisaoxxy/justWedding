@@ -93,6 +93,13 @@
 		        	<f:selectItem itemLabel="#{msg.yes}" itemValue="true" />
 		        	<f:selectItem itemLabel="#{msg.no}" itemValue="false" />
 		        </p:selectOneRadio>
+		        <h:outputText value="#{msg.table}"/>
+		        <p:selectOneMenu value="#{guestBean.tableId}">
+	   				<f:selectItem itemLabel="#{msg.table}" itemValue="" />
+	   				<ui:repeat var="table" value="#{tablesBean.tables}">
+	   					<f:selectItem itemLabel="#{table.name}" itemValue="#{table.id}" />
+   					</ui:repeat>
+   				</p:selectOneMenu>
 		    </h:panelGrid>
 		    <p:spacer width="100%" height="5px"/>
 		    <p:commandButton value="#{msg.invite}" action="#{guestBean.invite}"/>

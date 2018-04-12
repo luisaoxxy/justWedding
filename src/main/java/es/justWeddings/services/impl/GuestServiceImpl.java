@@ -1,4 +1,4 @@
-package es.justWeddings.services;
+package es.justWeddings.services.impl;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import es.justWeddings.dao.GuestDao;
 import es.justWeddings.domain.Guest;
 import es.justWeddings.domain.User;
+import es.justWeddings.services.GuestService;
 
 @Service
 public class GuestServiceImpl implements GuestService {

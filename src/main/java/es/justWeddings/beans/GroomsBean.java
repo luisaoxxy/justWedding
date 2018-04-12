@@ -9,7 +9,11 @@ import java.util.List;
 
 import javax.faces.bean.ViewScoped;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import es.justWeddings.domain.Wedding;
+import es.justWeddings.services.WeddingService;
 
 @Component
 @ViewScoped
@@ -22,15 +26,30 @@ public class GroomsBean {
 	private String weddingRestaurant;
 	private String weddingType;
 	private SimpleDateFormat format;
+	
+	@Autowired
+	private WeddingService weddingService;
 
 	public GroomsBean(){
 		brideName="Arantxa";
 		groomName="Luis";
 		Calendar cal = GregorianCalendar.getInstance();
 		cal.set(Calendar.YEAR, 2018);
-		cal.set(Calendar.MONTH, 12 );
-		cal.set(Calendar.DAY_OF_MONTH, 10);
+		cal.set(Calendar.MONTH, 6 );
+		cal.set(Calendar.DAY_OF_MONTH, 1);
 		weddingDate = cal.getTime();
+	}
+	
+	public String createWedding(){
+		Wedding wedding = new Wedding();
+		wedding.setBrideName(brideName);
+		wedding.setDate(weddingDate);
+		wedding.setGroomName(groomName);
+		wedding.setPlace(weddingPlace);
+		wedding.setRestaurant(weddingRestaurant);
+		wedding.setType(weddingType);
+		weddingService.createWedding(wedding);
+		return "homme";
 	}
 	
 	/* GETTER Y SETTERS */

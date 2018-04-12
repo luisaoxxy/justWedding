@@ -27,6 +27,7 @@ public class GuestBean {
   private String allergy;
   private String group;
   private String invitedBy;
+  private Integer tableId;
   private boolean invitationSend;
   private boolean confirmationReceived;
   private boolean haveAllergies;
@@ -43,6 +44,11 @@ public class GuestBean {
     guestList = guestService.getGuests("");
     if(guestList == null){
     	guestList = new ArrayList<Guest>();
+    	Guest guest = new Guest("Manu", "Torres", "M");
+    	guest.setVegetarian("Y");
+    	guest.setBusRequired("Y");
+    	guest.setInvitedBy("Luis");
+    	guestList.add(guest);
     }
 
   }
@@ -51,7 +57,7 @@ public class GuestBean {
    * add guest to guestList
    */
   public String invite() {
-    Guest newGuest = new Guest(null,guestName, guestLastName,guestSex);
+    Guest newGuest = new Guest(guestName, guestLastName,guestSex);
     newGuest.setAllerge(allergy);
     newGuest.setGroup(group);
     newGuest.setInvitedBy(invitedBy);
@@ -191,6 +197,14 @@ public String getAllergy() {
 
 public void setAllergy(String allergy) {
 	this.allergy = allergy;
+}
+
+public Integer getTableId() {
+	return tableId;
+}
+
+public void setTableId(Integer tableId) {
+	this.tableId = tableId;
 }
 
 }

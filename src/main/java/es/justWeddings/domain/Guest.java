@@ -1,8 +1,5 @@
 package es.justWeddings.domain;
 
-// Generated 08-Nov-2016 20:05:02 by Hibernate Tools 4.0.0
-
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -13,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -49,19 +45,20 @@ public class Guest implements java.io.Serializable {
 	private String invitationSend;
 	@Column(name="INVITED_BY")
 	private String invitedBy;
-	@OneToMany(mappedBy="id")
-	private Set<Guest> guests = new HashSet<Guest>(0);
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "TABLE_ID", referencedColumnName = "ID", nullable = true)
+	private Tables table = new Tables();
 
 	public Guest() {
 	}
 
-	public Guest(Guest guest, String name, String lastName, String sex) {
+	public Guest(String name, String lastName, String sex) {
 		this.name = name;
 		this.lastName = lastName;
 		this.sex = sex;
 	}
 
-	public Guest(Guest guest, User user, String name, String lastName,
+	public Guest(User user, String name, String lastName,
 			String sex, String allerge, String vegetarian, String isUserFriend,
 			Set<Guest> guests) {
 		this.user = user;
@@ -71,7 +68,6 @@ public class Guest implements java.io.Serializable {
 		this.allerge = allerge;
 		this.vegetarian = vegetarian;
 		this.invitedBy = isUserFriend;
-		this.guests = guests;
 	}
 
 	public Integer getId() {
@@ -169,14 +165,4 @@ public class Guest implements java.io.Serializable {
 	public void setInvitedBy(String invitedBy) {
 		this.invitedBy = invitedBy;
 	}
-
-	public Set<Guest> getGuests() {
-		return guests;
-	}
-
-	public void setGuests(Set<Guest> guests) {
-		this.guests = guests;
-	}
-
-
 }
