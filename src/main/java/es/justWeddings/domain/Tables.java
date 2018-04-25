@@ -2,9 +2,12 @@ package es.justWeddings.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import es.justWeddings.domain.types.TableTypes;
@@ -31,6 +34,9 @@ public class Tables implements java.io.Serializable {
 	private Integer xPosition;
 	@Column(name="Y_POSITION")
 	private Integer yPosition;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "WEDDING_ID", referencedColumnName = "ID", nullable = false)
+	private Wedding wedding = new Wedding();
 
 	public Tables() {
 	}

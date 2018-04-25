@@ -6,8 +6,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,9 +16,8 @@ import javax.persistence.Table;
 @Table(name = "wedding")
 public class Wedding implements java.io.Serializable {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "ID")
-	private Integer id;
+	private String id;
 	@Column(name = "date")
 	private Date date;
 	@Column(name = "place")
@@ -37,11 +34,11 @@ public class Wedding implements java.io.Serializable {
 	public Wedding() {
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

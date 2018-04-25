@@ -34,12 +34,20 @@
 			<to-view-id>calendar.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>resume</from-outcome>
+			<to-view-id>resume.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>guestList</from-outcome>
 			<to-view-id>guestList.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>tables</from-outcome>
 			<to-view-id>tables.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>supplier</from-outcome>
+			<to-view-id>suppliers.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>

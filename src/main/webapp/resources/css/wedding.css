@@ -54,22 +54,35 @@
     cursor: pointer;
     margin-left: 15%;
 }
+
 .center{
 	margin: 0 auto;
 	text-align: center;
 }
+
 .mainImage{
 	cursor: pointer;
 	width: 150px;
 	height: 150px;
 }
+
 .ico_baby{
 	width: 32px;
 	height: 32px;
 }
+
 .menu label{
 	font-weight: bold;
 }
+
+.resumeTable{
+	font-size: small !important;
+}
+
+.bold{
+	font-weight: bold !important;
+}
+
 .menu{
 	width: 100%;
 }
@@ -125,4 +138,7 @@
 .fc-event{
 	background: crimson !important;
 	border: black !important;
+}
+.resumeData{
+	background: #f4f0ec !important;
 }

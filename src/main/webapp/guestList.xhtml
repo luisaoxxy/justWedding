@@ -11,14 +11,18 @@
 	<ui:define name="body">
 	 #{guestBean.init()}
 	 <p:panel header="#{msg.guestList}" styleClass="welcomeTitle">
-		<h:form>
-	        <p:commandButton value="#{msg.addGuest}" action="addGuest" ajax="false"/>
+		<h:form id="form">
+	        <p:commandButton value="#{msg.addGuest}" action="addGuest" ajax="false">
+	        	<f:setPropertyActionListener value="" target="#{guestBean.editGuest}" />
+	        </p:commandButton>
 	        <p:separator/>
 	        
 	        <h:panelGrid columns="1">
-		        <p:dataTable id="guestList" emptyMessage="#{msg.noGuests}" styleClass="center" value="#{guestBean.guestList}" var="guest">
+		        <p:dataTable id="guestList" reflow="true" emptyMessage="#{msg.noGuests}" styleClass="center" value="#{guestBean.guestList}" var="guest">
 		            <p:column headerText="#{msg.name}" sortBy="#{guest.name}" filterMatchMode="contains" filterBy="#{guest.name}">
-		                <h:outputText value="#{guest.name}"/>
+		                <p:commandLink title="#{msg.guestInfo}" value="#{guest.name}" update="guestPanel" oncomplete="PF('editGuest').show('#{component.clientId}')">
+		                	<f:setPropertyActionListener value="#{guest}" target="#{guestBean.editGuest}" />
+		                </p:commandLink>
 		            </p:column>
 		            <p:column headerText="#{msg.lastName}" sortBy="#{guest.lastName}" filterMatchMode="contains" filterBy="#{guest.lastName}">
 		                <h:outputText value="#{guest.lastName}"/>
@@ -32,18 +36,21 @@
 		            <p:column headerText="#{msg.group}" sortBy="#{guest.group}" filterMatchMode="contains" filterBy="#{guest.group}">
 		                <h:outputText value="#{guest.group}"/>
 		            </p:column>
-		            <p:column headerText="#{msg.haveAllergies}">
+		            <p:column headerText="#{msg.haveAllergies}" sortBy="#{guest.allerge}">
 		                <h:graphicImage rendered="#{guest.allerge != null}" styleClass="ico" title="#{msg.haveAllergies}" alt="#{msg.haveAllergies}" url="#{resource['imgs/allergy.png']}"/>
 		            </p:column>
-		            <p:column headerText="#{msg.vegetarian}">
+		            <p:column headerText="#{msg.vegetarian}" sortBy="#{guest.vegetarian}">
 		                <h:graphicImage rendered="#{guest.vegetarian == 'Y'}" styleClass="ico" title="#{msg.vegetarian}" alt="#{msg.vegetarian}" url="#{resource['imgs/carrot.png']}"/>
 		            </p:column>
-		            <p:column headerText="#{msg.busRequired}">
+		            <p:column headerText="#{msg.busRequired}" sortBy="#{guest.busRequired}">
    		            	<h:graphicImage rendered="#{guest.busRequired == 'Y'}" styleClass="ico bus" title="#{msg.busRequired}" alt="#{msg.busRequired}" url="#{resource['imgs/bus.png']}"/>
 		            </p:column>
 		        </p:dataTable>
 			</h:panelGrid>
-		</h:form>
+			</h:form>
+			<p:overlayPanel widgetVar="editGuest" id="guestPanel" showEffect="blind" dismissable="false" hideEffect="explode" dynamic="false" showCloseIcon="true">
+				<ui:include src="guestForm.xhtml" />
+			</p:overlayPanel>
 	</p:panel>
 	</ui:define>
 </ui:composition>

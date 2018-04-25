@@ -3,7 +3,6 @@ package es.justWeddings.domain;
 // Generated 08-Nov-2016 20:05:02 by Hibernate Tools 4.0.0
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -58,8 +57,7 @@ public class User implements java.io.Serializable {
 	}
 
 	public User(String name, String lastName, String sex, String email,
-			String telephone, String adress, Date birthday, String theme,
-			Set<Guest> guests) {
+			String telephone, String adress, Date birthday, String theme) {
 		this.name = name;
 		this.lastName = lastName;
 		this.sex = sex;

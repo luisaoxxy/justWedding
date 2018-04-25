@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:p="http://primefaces.org/ui"
+   template="/template.xhtml">
+   
+	<ui:define name="body">
+	 #{guestBean.init()}
+	 <p:panel header="#{msg.resume}" styleClass="welcomeTitle">
+		 <p:accordionPanel activeIndex="0,1,2" multiple="true">
+        	<p:tab title="#{msg.guests}">	        
+		        <p:dataTable id="guestResume" reflow="true" emptyMessage="#{msg.noGuests}" styleClass="center resumeTable" value="">
+		            <p:columnGroup type="header">
+			            <p:row>
+				            <p:column headerText="#{msg.guestSex}" styleClass="bold" colspan="2"/>
+				            <p:column headerText="#{msg.childs}" styleClass="bold"/>
+				            <p:column headerText="#{msg.invitedBy}" colspan="2" styleClass="bold"/>
+				            <p:column headerText="#{msg.group}" styleClass="bold"/>
+				            <p:column headerText="#{msg.haveAllergies}" styleClass="bold"/>
+				            <p:column headerText="#{msg.vegetarian}" styleClass="bold"/>
+				            <p:column headerText="#{msg.busRequired}" styleClass="bold"/>
+			            </p:row>
+			            <ui:repeat var="group" varStatus="iterator" value="#{guestBean.guestGroups}">
+				            <p:row>
+					            <p:column headerText="#{resumeBean.menCount} #{msg['guestSex.male']}" rendered="#{iterator.first}" rowspan="#{iterator.end}" styleClass="resumeData"/>
+					            <p:column headerText="#{resumeBean.womensCount} #{msg['guestSex.female']}" rendered="#{iterator.first}" rowspan="#{iterator.end}" styleClass="resumeData"/>
+					            <p:column headerText="#{resumeBean.childsCount}" rendered="#{iterator.first}" rowspan="#{iterator.end}" styleClass="resumeData"/>
+					            <p:column headerText="#{resumeBean.groomCount} #{groomsBean.groomName}" rendered="#{iterator.first}" rowspan="#{iterator.end}" styleClass="resumeData"/>
+					            <p:column headerText="#{resumeBean.brideCount} #{groomsBean.brideName}" rendered="#{iterator.first}" rowspan="#{iterator.end}" styleClass="resumeData"/>
+					            <p:column headerText="#{resumeBean.getGroupCount(group)} #{group}" styleClass="resumeData"/>
+					            <p:column headerText="#{resumeBean.allergicCount}" rendered="#{iterator.first}" rowspan="#{iterator.end}" styleClass="resumeData"/>
+					            <p:column headerText="#{resumeBean.vegetarianCount}" rendered="#{iterator.first}" rowspan="#{iterator.end}" styleClass="resumeData"/>
+					            <p:column headerText="#{resumeBean.busNeededCount}" rendered="#{iterator.first}" rowspan="#{iterator.end}" styleClass="resumeData"/>
+				            </p:row>
+			            </ui:repeat>
+		            </p:columnGroup>
+		            <p:columnGroup type="footer">
+           				<p:row>
+				            <p:column colspan="8" style="text-align:right" footerText="Total:"/>
+			                <p:column footerText="#{guestBean.size}" />
+		                </p:row>
+       				</p:columnGroup>
+		        </p:dataTable>
+	        </p:tab>
+	        <p:tab title="#{msg.invitation}">	
+	        	<p:dataTable id="invitationResume" reflow="true" styleClass="center resumeTable" value="">
+		            <p:columnGroup type="header">
+			            <p:column headerText="#{msg.guests}" styleClass="bold"/>
+			            <p:column headerText="#{msg['invitation.send']}" styleClass="bold"/>
+			            <p:column headerText="#{msg['invitation.received']}" styleClass="bold"/>
+		            </p:columnGroup>
+		            <p:column>
+		            	<h:outputText value="#{guestBean.size}"/>
+		            </p:column>
+		            <p:column>
+		            	<h:outputText value="#{resumeBean.invitationsSendCount}"/>
+		            </p:column>
+		            <p:column>
+		            	<h:outputText value="#{resumeBean.confirmationReceivedCount}"/>
+		            </p:column>
+	            </p:dataTable>
+	        </p:tab>
+	        <p:tab title="#{msg.budget}">
+	        </p:tab>
+        </p:accordionPanel>
+	</p:panel>
+	</ui:define>
+</ui:composition>

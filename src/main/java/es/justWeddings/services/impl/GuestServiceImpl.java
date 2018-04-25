@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import es.justWeddings.dao.GuestDao;
 import es.justWeddings.domain.Guest;
-import es.justWeddings.domain.User;
+import es.justWeddings.domain.Wedding;
 import es.justWeddings.services.GuestService;
 
 @Service
@@ -28,8 +28,8 @@ public class GuestServiceImpl implements GuestService {
 	@Override
 	public String invite(Guest guest) {
 		try{
-			guest.setUser(new User());
-			guest.getUser().setId(1);
+			guest.setWedding(new Wedding());
+			guest.getWedding().setId("A");
 			guestDao.addGuest(guest);
 		}catch(Exception e){
 			logger.log(Level.SEVERE, "Error:", e);

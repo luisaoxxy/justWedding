@@ -180,14 +180,14 @@ var formatCompute = function(d, options) {
 	s: d.getUTCSeconds()
       };
       return format.replace(/(ddd|hh|mm|ss)/g, function($0, form) {
-	      return pad(parse[form[0]]);
+	      return pad(parse[form[0]],form);
       });
 };
 
 // add leading zeros
-var pad = function(x){
-	if(x > 99){
-		return x
+var pad = function(x,format){
+	if('ddd' == format){
+		return (1e15+""+x).slice(-3)
 	}else{
 		return (1e15+""+x).slice(-2)
 	}

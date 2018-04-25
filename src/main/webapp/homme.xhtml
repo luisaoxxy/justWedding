@@ -38,10 +38,10 @@
 		    		<h:form>
 				    	<h:panelGrid columns="3" styleClass="menu">
 				    	   <h:commandLink action="guestList">
-				    	   	<h:graphicImage styleClass="mainImage" title="#{msg.guests}" alt="#{msg.guests}" url="#{resource['imgs/guests.png']}"/>
+				    	   		<h:graphicImage styleClass="mainImage" title="#{msg.guests}" alt="#{msg.guests}" url="#{resource['imgs/guests.png']}"/>
 				    	   </h:commandLink>
 				    	   <h:commandLink action="calendar">
-					    	   <h:graphicImage styleClass="mainImage" title="#{msg.calendar}" alt="#{msg.calendar}" url="#{resource['imgs/calendar.png']}"/>
+					       		<h:graphicImage styleClass="mainImage" title="#{msg.calendar}" alt="#{msg.calendar}" url="#{resource['imgs/calendar.png']}"/>
 				    	   </h:commandLink>
 				    	   <h:graphicImage styleClass="mainImage" title="#{msg.cost}" alt="#{msg.cost}" url="#{resource['imgs/costs.png']}"/>
 				           <p:outputLabel value="#{msg.guests}"/>
@@ -50,8 +50,12 @@
 				    	   <h:commandLink action="tables">
 					    	   <h:graphicImage styleClass="mainImage" title="#{msg.tables}" alt="#{msg.tables}" url="#{resource['imgs/tables.png']}"/>
 				    	   </h:commandLink>
-				    	   <h:graphicImage styleClass="mainImage" title="#{msg.supplier}" alt="#{msg.supplier}" url="#{resource['imgs/suppliers.png']}"/>
-				    	   <h:graphicImage styleClass="mainImage" title="#{msg.resume}" alt="#{msg.resume}" url="#{resource['imgs/resume.png']}"/>
+				    	   <h:commandLink action="supplier">
+					    	   <h:graphicImage styleClass="mainImage" title="#{msg.supplier}" alt="#{msg.supplier}" url="#{resource['imgs/suppliers.png']}"/>
+				    	   </h:commandLink>
+				    	   <h:commandLink action="resume">
+					    	   <h:graphicImage styleClass="mainImage" title="#{msg.resume}" alt="#{msg.resume}" url="#{resource['imgs/resume.png']}"/>
+				    	   </h:commandLink>
 				           <p:outputLabel value="#{msg.tables}"/>
 				           <p:outputLabel value="#{msg.supplier}"/>
 				           <p:outputLabel value="#{msg.resume}"/>

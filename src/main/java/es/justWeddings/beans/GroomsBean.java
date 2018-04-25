@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.UUID;
 
 import javax.faces.bean.ViewScoped;
 
@@ -25,6 +26,7 @@ public class GroomsBean {
 	private String weddingPlace;
 	private String weddingRestaurant;
 	private String weddingType;
+	private String weddingId;
 	private SimpleDateFormat format;
 	
 	@Autowired
@@ -42,6 +44,7 @@ public class GroomsBean {
 	
 	public String createWedding(){
 		Wedding wedding = new Wedding();
+		wedding.setId(UUID.randomUUID().toString());
 		wedding.setBrideName(brideName);
 		wedding.setDate(weddingDate);
 		wedding.setGroomName(groomName);
@@ -49,6 +52,7 @@ public class GroomsBean {
 		wedding.setRestaurant(weddingRestaurant);
 		wedding.setType(weddingType);
 		weddingService.createWedding(wedding);
+		weddingId = wedding.getId();
 		return "homme";
 	}
 	
@@ -116,4 +120,11 @@ public class GroomsBean {
 		this.weddingType = weddingType;
 	}
 
+	public String getWeddingId() {
+		return weddingId;
+	}
+
+	public void setWeddingId(String weddingId) {
+		this.weddingId = weddingId;
+	}
 }

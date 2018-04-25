@@ -33,6 +33,7 @@ public class GuestBean {
   private boolean haveAllergies;
   private boolean vegetarian;
   private boolean busRequired;
+  private Guest editGuest;
   
   private List<String> guestGroups;
   private List<Guest> guestList;
@@ -45,9 +46,20 @@ public class GuestBean {
     if(guestList == null){
     	guestList = new ArrayList<Guest>();
     	Guest guest = new Guest("Manu", "Torres", "M");
-    	guest.setVegetarian("Y");
+    	guest.setVegetarian("N");
     	guest.setBusRequired("Y");
     	guest.setInvitedBy("Luis");
+    	guest.setGroup("Marmotas");
+    	guest.setInvitationSend(Constants.YES);
+    	guestList.add(guest);
+    	guest = new Guest("Natalia", "Peque", "F");
+    	guest.setVegetarian("Y");
+    	guest.setBusRequired("Y");
+    	guest.setInvitedBy("Arantxa");
+    	guest.setGroup("Uni");
+    	guest.setAllerge("Lactosa");
+    	guest.setInvitationSend(Constants.YES);
+    	guest.setConfirmationReceived(Constants.YES);
     	guestList.add(guest);
     }
 
@@ -70,11 +82,28 @@ public class GuestBean {
     return "guestList";
   }
 
+  public String updateInfo() {
+	  editGuest.setName(guestName);
+	  editGuest.setLastName(guestLastName);
+	  editGuest.setSex(guestSex);
+	  editGuest.setAllerge(allergy);
+	  editGuest.setGroup(group);
+	  editGuest.setInvitedBy(invitedBy);
+	  editGuest.setConfirmationReceived(confirmationReceived ? Constants.YES : Constants.NO);
+	  editGuest.setInvitationSend(invitationSend ? Constants.YES : Constants.NO);
+	  editGuest.setVegetarian(vegetarian ? Constants.YES : Constants.NO);
+	  editGuest.setBusRequired(busRequired ? Constants.YES : Constants.NO);
+	  return "";
+  }
+
   /* GETTER Y SETTERS */
   public void setGuestService(GuestService guestService) {
     this.guestService = guestService;
   }
 
+  public int getSize(){
+	  return guestList != null ? guestList.size() :0;
+  }
   public String getGuestName() {
     return guestName;
   }
@@ -205,6 +234,27 @@ public Integer getTableId() {
 
 public void setTableId(Integer tableId) {
 	this.tableId = tableId;
+}
+
+public Guest getEditGuest() {
+	return editGuest;
+}
+
+public void setEditGuest(Guest editGuest) {
+	this.editGuest = editGuest;
+	if(editGuest == null){
+		editGuest = new Guest();
+	}
+	guestName = editGuest.getName();
+	guestLastName = editGuest.getLastName();
+	guestSex = editGuest.getSex();
+	allergy = editGuest.getAllerge();
+    group = editGuest.getGroup();
+    invitedBy = editGuest.getInvitedBy();
+    confirmationReceived = Constants.YES.equals(editGuest.getConfirmationReceived());
+    invitationSend = Constants.YES.equals(editGuest.getInvitationSend());
+    vegetarian = Constants.YES.equals(editGuest.getVegetarian());
+    busRequired = Constants.YES.equals(editGuest.getBusRequired());
 }
 
 }
