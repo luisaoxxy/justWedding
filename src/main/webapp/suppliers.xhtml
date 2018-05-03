@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:p="http://primefaces.org/ui"
+   template="/template.xhtml">
+   
+	<ui:define name="body">
+		<p:panel header="#{msg.supplier}" styleClass="welcomeTitle">
+	 		<h:form id="supForm">
+			 	<p:outputPanel id="supplierPanel">
+					<p:tree value="#{suppliersBean.suppliersTree}" var="sup" selectionMode="single" selection="#{suppliersBean.selectedSupplier}">
+				        <p:ajax event="select" update=":supForm:tableDetail" oncomplete="PF('suppliersDetail').show()" listener="#{suppliersBean.onNodeSelect}" />
+				        <p:treeNode>
+				            <h:outputText rendered="#{sup.name == 'bride'}" value="#{groomsBean.brideName}"/>
+				            <h:outputText rendered="#{sup.name == 'groom'}" value="#{groomsBean.groomName}"/>
+				            <h:outputText value="#{msg[sup.name]}"/>
+				        </p:treeNode>
+				        <p:treeNode type="leaf">
+				            <h:outputText value="#{sup.name}"/>
+				        </p:treeNode>
+			       </p:tree>
+			 	</p:outputPanel>
+       			<p:dialog header="#{suppliersBean.selectedSupplier.type == 'leaf' ? suppliersBean.selectedSupplier.data : msg[suppliersBean.selectedSupplier.data]}" widgetVar="suppliersDetail" id="tableDetail" showEffect="explode" hideEffect="explode">
+			  		<p:panelGrid>
+						<p:row>
+							<p:column>
+						  		<h:outputText value="#{msg.description}"/>
+							</p:column>
+							<p:column>
+						    	<h:inputText value="#{suppliersBean.name}"/>
+							</p:column>
+						</p:row>		  		
+						<p:row>		  		
+							<p:column colspan="2">
+							    <p:selectOneRadio value="#{suppliersBean.confirmed}" layout="responsive" columns="2">
+							    	<f:selectItem itemLabel="#{msg.confirmed}" itemValue="true" />
+							    	<f:selectItem itemLabel="#{msg.pending}" itemValue="false" />
+							    </p:selectOneRadio>
+							</p:column>
+						</p:row>		  		
+						<p:row>
+							<p:column>
+						  		<h:outputText value="#{msg.estimation}"/>
+							</p:column>
+							<p:column>
+						    	<p:spinner value="#{suppliersBean.estimation}" suffix="#{msg.coin}" min="0" maxlength="6" />
+							</p:column>
+						</p:row>		  		
+						<p:row>		  		
+							<p:column>
+							  	<h:outputText value="#{msg.finalPrice}"/>
+							</p:column>
+							<p:column>
+							    <p:spinner value="#{suppliersBean.finalPrice}" suffix="#{msg.coin}" min="0" maxlength="6">
+							    	<p:ajax event="change" update="toPaid"/>
+							    </p:spinner>
+							</p:column>
+						</p:row>		  		
+						<p:row>		  		
+							<p:column>
+							  	<h:outputText value="#{msg.paid}"/>
+							</p:column>
+							<p:column>
+							    <p:spinner value="#{suppliersBean.paid}" suffix="#{msg.coin}" min="0" maxlength="6">
+							    	<p:ajax event="change" update="toPaid"/>
+							    </p:spinner>
+							</p:column>
+						</p:row>		  		
+						<p:row>		  		
+							<p:column>
+							  	<h:outputText value="#{msg.toBePaid}"/>
+							</p:column>
+							<p:column>
+							    <p:spinner id="toPaid" readonly="true" value="#{suppliersBean.finalPrice - suppliersBean.paid}" disabled="true" suffix="#{msg.coin}" min="0" maxlength="6"/>
+							</p:column>
+						</p:row>		  		
+						<p:row>		  		
+							<p:column>
+							  	<h:outputText value="#{msg.notes}"/>
+							</p:column>
+							<p:column>
+							  	<h:inputText value="#{suppliersBean.notes}"/>
+							</p:column>
+						</p:row>		  		
+			  		</p:panelGrid>
+					<p:commandButton value="#{msg.save}" actionListener="#{suppliersBean.updateSuplier}" update="supplierPanel" oncomplete="PF('suppliersDetail').hide()" icon="fa fa-fw fa-save"/>
+  				</p:dialog>
+		 	</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
