@@ -9,7 +9,7 @@
    template="/template.xhtml">
    
 	<ui:define name="body">
-		<p:panel header="#{msg.supplier}" styleClass="welcomeTitle">
+		<p:panel header="#{msg.outlays}" styleClass="welcomeTitle">
 	 		<h:form id="supForm">
 			 	<p:outputPanel id="supplierPanel">
 					<p:tree value="#{suppliersBean.suppliersTree}" var="sup" selectionMode="single" selection="#{suppliersBean.selectedSupplier}">

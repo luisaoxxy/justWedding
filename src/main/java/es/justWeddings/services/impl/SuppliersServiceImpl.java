@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.justWeddings.dao.SuppliersDao;
-import es.justWeddings.domain.Suppliers;
-import es.justWeddings.domain.Suppliers4wedding;
+import es.justWeddings.domain.Outlays;
+import es.justWeddings.domain.Outlays4wedding;
 import es.justWeddings.services.SuppliersService;
 import es.justWeddings.utils.Constants;
 
@@ -23,13 +23,14 @@ public class SuppliersServiceImpl implements SuppliersService {
 	
 
 	@Override
-	public TreeNode getSupplierTree(String weddingId) {
-		List<Suppliers> suppliers = suppliersDao.findSupliersByWedding(weddingId);
+	public TreeNode getSupplierTree(String weddingId,List<Outlays4wedding> outlaysList) {
+		List<Outlays> suppliers = suppliersDao.findSupliersByWedding(weddingId);
 		TreeNode root = new DefaultTreeNode();
-		for (Suppliers suppIter : suppliers) {
+		for (Outlays suppIter : suppliers) {
 			TreeNode nodeAux = new DefaultTreeNode(suppIter,root);
 			if(suppIter.getSupplier4wedding() != null && !suppIter.getSupplier4wedding().isEmpty()){
-				for (Suppliers4wedding sup4wed : suppIter.getSupplier4wedding()) {
+				for (Outlays4wedding sup4wed : suppIter.getSupplier4wedding()) {
+					outlaysList.add(sup4wed);
 					TreeNode childNode = new DefaultTreeNode(Constants.LEAF,sup4wed,nodeAux);
 				}
 			}

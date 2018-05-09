@@ -50,16 +50,18 @@ public class Guest implements java.io.Serializable {
 	private Tables table = new Tables();
 
 	public Guest() {
-	}
-
-	public Guest(String name, String lastName, String sex) {
-		this.name = name;
-		this.lastName = lastName;
-		this.sex = sex;
 		this.invitationSend = Constants.NO;
 		this.vegetarian = Constants.NO;
 		this.confirmationReceived = Constants.NO;
 		this.busRequired = Constants.NO;
+		this.sex = Constants.MALE;
+	}
+
+	public Guest(String name, String lastName, String sex) {
+		this();
+		this.name = name;
+		this.lastName = lastName;
+		this.sex = sex;
 	}
 
 	public Guest(Wedding wedding, String name, String lastName,
@@ -167,5 +169,13 @@ public class Guest implements java.io.Serializable {
 
 	public void setInvitedBy(String invitedBy) {
 		this.invitedBy = invitedBy;
+	}
+
+	public Tables getTable() {
+		return table;
+	}
+
+	public void setTable(Tables table) {
+		this.table = table;
 	}
 }

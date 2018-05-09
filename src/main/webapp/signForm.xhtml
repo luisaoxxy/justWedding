@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/template.xhtml">
+
+	<ui:define name="body">
+		<p:panel header="#{msg.login}" styleClass="welcomeTitle">
+			<h:panelGrid styleClass="mainPage" columns="1">
+				<h:form prependId="false">
+					<p:outputLabel value="#{msg['login.fail']}" styleClass="red" rendered="${!empty param['error']}" />
+					<p:inputText id="username" name="username" required="true" placeholder="#{msg.email}" />
+					<p:password id="password" name="password" required="true" feedback="true" placeholder="#{msg.password}" promptLabel="#{msg['password.enter']}" 
+						weakLabel="#{msg['password.weak']}" goodLabel="#{msg['password.good']}" strongLabel="#{msg['password.strong']}" />
+					<h:commandButton action="#{loginBean.doLogin}" type="submit" value="#{msg['login.button']}"/>
+				</h:form>
+			</h:panelGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>

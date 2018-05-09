@@ -24,44 +24,46 @@
 	</factory>
 	<!-- RULES -->
 	<navigation-rule>
-		<from-view-id>*</from-view-id>
+		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>homme</from-outcome>
-			<to-view-id>homme.xhtml</to-view-id>
+			<to-view-id>/homme.xhtml</to-view-id>
+			<redirect>true</redirect>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>calendar</from-outcome>
-			<to-view-id>calendar.xhtml</to-view-id>
+			<to-view-id>/calendar.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>resume</from-outcome>
-			<to-view-id>resume.xhtml</to-view-id>
+			<to-view-id>/resume.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>guestList</from-outcome>
-			<to-view-id>guestList.xhtml</to-view-id>
+			<to-view-id>/guestList.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>tables</from-outcome>
-			<to-view-id>tables.xhtml</to-view-id>
+			<to-view-id>/tables.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>supplier</from-outcome>
-			<to-view-id>suppliers.xhtml</to-view-id>
+			<from-outcome>outlays</from-outcome>
+			<to-view-id>/outlays.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<from-view-id>guestList.xhtml</from-view-id>
+		<from-view-id>/guestList.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>addGuest</from-outcome>
-			<to-view-id>newGuest.xhtml</to-view-id>
+			<to-view-id>/newGuest.xhtml</to-view-id>
+			<redirect>true</redirect>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<from-view-id>tables.xhtml</from-view-id>
+		<from-view-id>/tables.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>tableGuests</from-outcome>
-			<to-view-id>tableGuests.xhtml</to-view-id>
+			<to-view-id>/tableGuests.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
 	</navigation-rule>

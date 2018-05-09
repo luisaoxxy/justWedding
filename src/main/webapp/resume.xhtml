@@ -40,8 +40,8 @@
 		            </p:columnGroup>
 		            <p:columnGroup type="footer">
            				<p:row>
-				            <p:column colspan="8" style="text-align:right" footerText="Total:"/>
-			                <p:column footerText="#{guestBean.size}" />
+				            <p:column colspan="4" style="text-align:right" footerText="#{msg.total}"/>
+			                <p:column colspan="5" style="text-align:left" footerText="#{guestBean.size}" />
 		                </p:row>
        				</p:columnGroup>
 		        </p:dataTable>
@@ -65,6 +65,24 @@
 	            </p:dataTable>
 	        </p:tab>
 	        <p:tab title="#{msg.budget}">
+	         	<p:dataTable id="outlays" reflow="true" emptyMessage="#{msg.noOutlays}" styleClass="center" value="#{suppliersBean.outLaysList}" var="outLay">
+	         		<p:column headerText="#{msg.concept}">
+		                <h:outputText value="#{outLay.name}"/>
+		            </p:column>
+	         		<p:column headerText="#{msg.paid}">
+		                <h:outputText value="#{outLay.amountPaid}"/>
+		            </p:column>
+	         		<p:column headerText="#{msg.toBePaid}">
+		                <h:outputText value="#{outLay.finalPrice - outLay.amountPaid}"/>
+		            </p:column>
+		            <p:columnGroup type="footer">
+           				<p:row>
+				            <p:column footerText="#{msg.total}:"/>
+			                <p:column footerText="#{suppliersBean.totalPaid}" />
+			                <p:column footerText="#{suppliersBean.totalPending}" />
+		                </p:row>
+       				</p:columnGroup>
+	         	</p:dataTable>
 	        </p:tab>
         </p:accordionPanel>
 	</p:panel>

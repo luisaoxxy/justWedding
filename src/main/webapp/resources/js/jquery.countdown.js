@@ -18,6 +18,7 @@ var createDigits = function(where, options) {
   intervals = [];
 
   for (var i = 0; i < options.startTime.length; i++) {
+	  var append = false;
     if (parseInt(options.startTime[i]) >= 0) {
       elem = $('<div id="cnt_' + counter + '" class="cntDigit" />').css({
 	height: options.digitHeight,
@@ -65,11 +66,30 @@ var createDigits = function(where, options) {
 
       counter += 1;
     } else {
-      elem = $('<div class="cntSeparator"/>').css({float: 'left'})
-					     .text(options.startTime[i]);
+    	append = true;
+    	elem = $('<div class="cntSeparator"/>').css({float: 'left'})
+		     .text(options.startTime[i]);
     }
-    where.append(elem)
+    where.append(elem);
+    if(append){
+    	if(i == 3){
+    		elem = $('<div class="cntSeparator2"/>').css({float: 'left'})
+    		.text('days');
+    	}else if(i == 6){
+    		elem = $('<div class="cntSeparator2"/>').css({float: 'left'})
+    		.text('hours');
+    	}else{
+    		elem = $('<div class="cntSeparator2"/>').css({float: 'left'})
+    		.text('mins');
+    	}
+    	where.append(elem);
+    }
   }
+  elem = $('<div class="cntSeparator"/>').css({float: 'left'});
+  where.append(elem);
+  elem = $('<div class="cntSeparator2"/>').css({float: 'left'})
+  .text('seconds');
+  where.append(elem);
 };
 
 var makeMovement = function(elem, steps, isForward, options) {

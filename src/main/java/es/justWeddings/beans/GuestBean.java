@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import es.justWeddings.domain.Guest;
+import es.justWeddings.domain.Tables;
 import es.justWeddings.services.GuestService;
 import es.justWeddings.utils.Constants;
 
@@ -51,6 +52,9 @@ public class GuestBean {
     	guest.setInvitedBy("Luis");
     	guest.setGroup("Marmotas");
     	guest.setInvitationSend(Constants.YES);
+    	Tables friends = new Tables("friends", "C", "Arantxa", 2);
+  	  	friends.setId(2);
+  	  	guest.setTable(friends);
     	guestList.add(guest);
     	guest = new Guest("Natalia", "Peque", "F");
     	guest.setVegetarian("Y");
@@ -249,6 +253,7 @@ public void setEditGuest(Guest editGuest) {
 	guestLastName = editGuest.getLastName();
 	guestSex = editGuest.getSex();
 	allergy = editGuest.getAllerge();
+	haveAllergies = allergy != null;
     group = editGuest.getGroup();
     invitedBy = editGuest.getInvitedBy();
     confirmationReceived = Constants.YES.equals(editGuest.getConfirmationReceived());

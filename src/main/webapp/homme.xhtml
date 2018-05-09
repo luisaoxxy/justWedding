@@ -20,17 +20,6 @@
 				      </div>
 			    	</div>
 		    	</h:panelGroup>
-		    	<h:panelGroup>
-					<h:panelGrid columns="7" styleClass="contDown_labels">
-				        <h:outputText value="#{msg.days}"/>
-				        <h:outputText value=""/>
-				        <h:outputText value="#{msg.hours}"/>
-				        <h:outputText value=""/>
-				        <h:outputText value="#{msg.minutes}"/>
-				        <h:outputText value=""/>
-				        <h:outputText value="#{msg.seconds}"/>
-			        </h:panelGrid>
-		    	</h:panelGroup>
 		    	<!--  
 		    	<p:spacer height="0.5%" width="100%"/>
 		    	-->
@@ -43,21 +32,20 @@
 				    	   <h:commandLink action="calendar">
 					       		<h:graphicImage styleClass="mainImage" title="#{msg.calendar}" alt="#{msg.calendar}" url="#{resource['imgs/calendar.png']}"/>
 				    	   </h:commandLink>
-				    	   <h:graphicImage styleClass="mainImage" title="#{msg.cost}" alt="#{msg.cost}" url="#{resource['imgs/costs.png']}"/>
+				    	   <h:commandLink action="outlays">
+					    	   <h:graphicImage styleClass="mainImage" title="#{msg.outlays}" alt="#{msg.outlays}" url="#{resource['imgs/costs.png']}"/>
+				    	   </h:commandLink>
 				           <p:outputLabel value="#{msg.guests}"/>
 				           <p:outputLabel value="#{msg.calendar}"/>
-				           <p:outputLabel value="#{msg.cost}"/>
+				           <p:outputLabel value="#{msg.outlays}"/>
 				    	   <h:commandLink action="tables">
 					    	   <h:graphicImage styleClass="mainImage" title="#{msg.tables}" alt="#{msg.tables}" url="#{resource['imgs/tables.png']}"/>
 				    	   </h:commandLink>
-				    	   <h:commandLink action="supplier">
-					    	   <h:graphicImage styleClass="mainImage" title="#{msg.supplier}" alt="#{msg.supplier}" url="#{resource['imgs/suppliers.png']}"/>
-				    	   </h:commandLink>
 				    	   <h:commandLink action="resume">
-					    	   <h:graphicImage styleClass="mainImage" title="#{msg.resume}" alt="#{msg.resume}" url="#{resource['imgs/resume.png']}"/>
+					    	   <h:graphicImage styleClass="mainImage" title="#{msg.resume}" alt="#{msg.resume}" url="#{resource['imgs/resume_folders.png']}"/>
 				    	   </h:commandLink>
+				    	   <p:spacer height="1px"/>
 				           <p:outputLabel value="#{msg.tables}"/>
-				           <p:outputLabel value="#{msg.supplier}"/>
 				           <p:outputLabel value="#{msg.resume}"/>
 				      	</h:panelGrid>
 		    		</h:form>

@@ -1,5 +1,8 @@
 package es.justWeddings.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
 
@@ -9,8 +12,8 @@ import org.primefaces.model.TreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import es.justWeddings.domain.Suppliers;
-import es.justWeddings.domain.Suppliers4wedding;
+import es.justWeddings.domain.Outlays;
+import es.justWeddings.domain.Outlays4wedding;
 import es.justWeddings.services.SuppliersService;
 import es.justWeddings.utils.Constants;
 
@@ -21,6 +24,7 @@ public class SuppliersBean {
 	private TreeNode suppliersTree;
     
     private TreeNode selectedSupplier;
+    private List<Outlays4wedding> outLaysList;
     
     private boolean confirmed; 
     private double estimation; 
@@ -36,13 +40,14 @@ public class SuppliersBean {
     
     @PostConstruct
     public void init() {
-    	suppliersTree =   suppliersService.getSupplierTree(groomsBean.getWeddingId());
+    	outLaysList = new ArrayList<Outlays4wedding>();
+    	suppliersTree =   suppliersService.getSupplierTree(groomsBean.getWeddingId(),outLaysList);
     }
     
     public void onNodeSelect(NodeSelectEvent event) {
     	selectedSupplier = event.getTreeNode();
-    	if(selectedSupplier.getData() instanceof Suppliers4wedding) {
-    		Suppliers4wedding sup = (Suppliers4wedding) selectedSupplier.getData();
+    	if(selectedSupplier.getData() instanceof Outlays4wedding) {
+    		Outlays4wedding sup = (Outlays4wedding) selectedSupplier.getData();
     		confirmed = sup.getConfirmed().equals(Constants.YES);
     		estimation = sup.getEstimatedPrice();
     		finalPrice = sup.getFinalPrice();
@@ -60,12 +65,12 @@ public class SuppliersBean {
     }
     
     public void updateSuplier(){
-    	Suppliers4wedding selected = null;
-    	if(selectedSupplier.getData() instanceof Suppliers4wedding) {
-    		selected = (Suppliers4wedding)selectedSupplier.getData();
+    	Outlays4wedding selected = null;
+    	if(selectedSupplier.getData() instanceof Outlays4wedding) {
+    		selected = (Outlays4wedding)selectedSupplier.getData();
     	}else{
-    		selected = new Suppliers4wedding();
-    		selected.setSupplier((Suppliers)selectedSupplier.getData());
+    		selected = new Outlays4wedding();
+    		selected.setOutlay((Outlays)selectedSupplier.getData());
     		TreeNode childNode = new DefaultTreeNode(Constants.LEAF,selected,selectedSupplier);
     	}
     	selected.setAmountPaid(paid);
@@ -75,6 +80,16 @@ public class SuppliersBean {
     	selected.setName(name);
     	selected.setNotes(notes);
     }
+    public Double getTotalPaid(){
+    	return outLaysList.stream().map(Outlays4wedding::getAmountPaid).mapToDouble(Double::doubleValue).sum(); 
+    }
+
+    public Double getTotalPending(){
+    	 double price = outLaysList.stream().map(Outlays4wedding::getFinalPrice).mapToDouble(Double::doubleValue).sum();
+    	 return price - getTotalPaid();
+    }
+
+    /* GETTERS & SETTERS */
     
 	public TreeNode getSuppliersTree() {
 		return suppliersTree;
@@ -138,6 +153,15 @@ public class SuppliersBean {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+
+	public List<Outlays4wedding> getOutLaysList() {
+		return outLaysList;
+	}
+
+	public void setOutLaysList(List<Outlays4wedding> outLaysList) {
+		this.outLaysList = outLaysList;
 	}
 
 }

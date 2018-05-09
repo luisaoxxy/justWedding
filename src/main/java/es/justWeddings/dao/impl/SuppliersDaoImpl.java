@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.justWeddings.dao.SuppliersDao;
-import es.justWeddings.domain.Suppliers;
+import es.justWeddings.domain.Outlays;
 @Repository
 @Transactional
 public class SuppliersDaoImpl implements SuppliersDao{
@@ -20,9 +20,9 @@ public class SuppliersDaoImpl implements SuppliersDao{
     private EntityManager manager;
 
 	@SuppressWarnings("unchecked")
-	public List<Suppliers> findSupliersByWedding(String weddingId){
-		StringBuilder sql = new StringBuilder("SELECT su FROM Suppliers su ");
-		sql.append("LEFT JOIN FETCH su.supplier4wedding su4w WHERE su4w IS NULL  OR su4w.wedding.id= :weddingId");
+	public List<Outlays> findSupliersByWedding(String weddingId){
+		StringBuilder sql = new StringBuilder("SELECT su FROM Outlays su ");
+		sql.append("LEFT JOIN FETCH su.outlays4wedding su4w WHERE su4w IS NULL  OR su4w.wedding.id= :weddingId");
 		Query query = manager.createQuery(sql.toString());
 		query.setParameter("weddingId", weddingId);
 		return query.getResultList();
